@@ -23,6 +23,18 @@ const groupRepo = {
           throw error;
         }
       },
+      findGroupByName: async ({name}) => {
+        try {
+          const result = await Group.findOne({
+            where: {
+              name: name,
+            },
+          });
+          return result;
+        } catch (error) {
+          throw error;
+        }
+      },
       getGroupById: async (groupId) => {
         try {
           const result = await Group.findOne({

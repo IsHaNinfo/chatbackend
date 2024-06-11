@@ -2,13 +2,20 @@ import groupRepo from "../repositories/group.repo.js";
 import userRepo from "../repositories/user.repo.js";
 
 const groupSerivce ={
-    createGroup : async (name) =>{
+    createGroup: async (name) => {
         try {
+            // Check if the group name already exists
+            const existingGroup = await groupRepo.findGroupByName({name});
+            if (existingGroup) {
+                return { status: false, message: "Group name already registered!" };
+            }
+    
+            // Create the group if the name is not registered
             const result = await groupRepo.createGroup({ name });
             if (result) {
-                return { status: true, message: "Group created successfully", result }
+                return { status: true, message: "Group created successfully", result };
             } else {
-                return { status: false, message: "Group create failed!" }
+                return { status: false, message: "Group creation failed!" };
             }
         } catch (error) {
             throw error;
@@ -45,6 +52,14 @@ const groupSerivce ={
             throw error;
         }
     },
+    findGroupByName: async ({name}) => {
+        try {
+          const group = await groupRepo.findGroupByName({name});
+          return group;
+        } catch (error) {
+          throw error;
+        }
+      },
     getGroupMembers: async (groupId) => {
         try {
           const user = await groupRepo.getGroupMembers(groupId);

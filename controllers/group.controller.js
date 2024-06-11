@@ -93,6 +93,38 @@ const groupController ={
         });
       }
     },
+
+    findGroupByName: async (req, res) => {
+      const { name } = req.body;
+      try {
+        const result = await groupSerivce.findGroupByName({ name });
+        console.log("sss", result);
+        if (result === null) {
+          // Status is true, so registration is successful
+          res.status(400).json({
+            response_code: 400,
+            success: true,
+            message: "Group not found",
+            result
+          });
+        } else {
+          console.log(result);
+          // Status is false, there is an error
+          res.status(200).json({
+            response_code: 200,
+            success: false,
+            result
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({
+          error: error.message || 'Error occurred',
+          response_code: 500,
+          success: false
+        });
+      }
+    }
 }
 
 export default groupController;
