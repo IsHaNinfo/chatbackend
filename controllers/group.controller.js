@@ -103,7 +103,7 @@ const groupController ={
           // Status is true, so registration is successful
           res.status(400).json({
             response_code: 400,
-            success: true,
+            success: false,
             message: "Group not found",
             result
           });
@@ -112,7 +112,7 @@ const groupController ={
           // Status is false, there is an error
           res.status(200).json({
             response_code: 200,
-            success: false,
+            success: true,
             result
           });
         }
