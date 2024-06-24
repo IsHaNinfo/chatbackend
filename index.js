@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import sequelize from "./config/db.connection.js";
 import userRoutes from "./routes/user.router.js";
 import messageRoutes from "./routes/message.route.js";
+import liveStramroutes from  "./routes/livestream.route.js"
 import userRepo from "./repositories/user.repo.js"
 import http from "http";
 import { Server } from "socket.io";
@@ -125,7 +126,7 @@ export { io };
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
 app.use("/group", groupRoutes);
-
+app.use("/livestream", liveStramroutes);
 
 //run server
 server.listen(PORT, () => {

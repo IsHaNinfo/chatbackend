@@ -98,6 +98,40 @@ export const UserGroup = sequelize.define(
     }
 );
 
+
+export const LiveStream = sequelize.define(
+    "LiveStream",
+    {
+        channelname: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+            defaultValue: () => generateUniqueChannelName(),
+        },
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false,
+        },
+    },
+    {
+        tableName: "livestreams",
+    }
+);
+
+function generateUniqueChannelName() {
+    // Generate a random string of alphabetic characters
+    const length = 9;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
 // Associations
 User.hasMany(Message, {
     as: 'messages',
