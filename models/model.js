@@ -26,7 +26,7 @@ export const User = sequelize.define(
         }
     },
     {
-        tableName: "Users",
+        tableName: "users",
     }
 );
 
@@ -68,7 +68,7 @@ export const Message = sequelize.define(
         },
     },
     {
-        tableName: "Messages",
+        tableName: "messages",
     }
 );
 
@@ -94,7 +94,7 @@ export const UserGroup = sequelize.define(
         },
     },
     {
-        tableName: "UserGroups",
+        tableName: "usergroups",
     }
 );
 
